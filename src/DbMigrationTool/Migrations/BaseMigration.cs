@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 
 namespace DbMigrationTool.Migrations
 {
     public abstract class BaseMigration
     {
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["MPZ"].ConnectionString;
+        private readonly string _connectionString = Program.Configuration.GetConnectionString("ConnectionStrings:DefaultConnection");
 
         public void Execute(string migrationName, string migrationHash, Mode mode)
         {

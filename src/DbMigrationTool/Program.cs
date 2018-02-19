@@ -1,11 +1,20 @@
 ﻿using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace DbMigrationTool
 {
     class Program
     {
+        public static IConfiguration Configuration { get; private set; }
+
         static void Main(string[] args)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
+
             var initializer = new MigrationProcessor();
             initializer.Process(GetMode(args));
 
