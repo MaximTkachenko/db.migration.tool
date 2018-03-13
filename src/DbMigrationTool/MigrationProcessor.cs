@@ -70,7 +70,7 @@ END");
             string workFolder = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             var doc = XDocument.Load(Path.Combine(workFolder, MigrationsSequence));
             return doc.Descendants("migrations").Elements("migration")
-                .Select(m => new KeyValuePair<string, string>(m.Attribute("name").Value, m.Attribute("hash").Value))
+                .Select(m => new KeyValuePair<string, string>(m.Attribute("name")?.Value, m.Attribute("hash")?.Value))
                 .ToArray();
         }
     }

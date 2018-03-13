@@ -19,7 +19,7 @@ namespace DbMigrationTool
             DurationInSeconds = duractioninSeconds;
             AppliedDateTime = DateTime.Now;
             IsOk = ex == null;
-            Error = ex == null ? null :  $"{ex.Message}\n{ex.StackTrace}";
+            Error = ex == null ? null :  $"{ex.Message}\r\n{ex.StackTrace}";
         }
     }
 }
