@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <migrations>
-    <migration name="AddCompanyIdToDivisionTable" hash="1986FC5DA71F48826272FD14898C51BE"/>
-    <migration name="AddContractIdToAllContractWorksTables" hash="94456193D3E69A8A9E6A4F0EA0AA7D3F"/>
+    <migration name="CreateHumanTable" hash="66127BD65501266CA6EDDD9D07D612E0"/>
 </migrations>
