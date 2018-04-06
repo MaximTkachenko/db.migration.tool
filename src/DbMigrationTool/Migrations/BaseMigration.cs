@@ -4,14 +4,11 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using Dapper;
-using Microsoft.Extensions.Configuration;
 
 namespace DbMigrationTool.Migrations
 {
     public abstract class BaseMigration
     {
-        private readonly string _connectionString = Program.Configuration.GetConnectionString("ConnectionStrings:DefaultConnection");
-
         public void Execute(string migrationName, string migrationHash, Mode mode)
         {
             Console.WriteLine($"{migrationName} started");
@@ -31,7 +28,7 @@ namespace DbMigrationTool.Migrations
             migration.Mode = (int) mode;
 
             var sw = Stopwatch.StartNew();
-            using (IDbConnection conn = new SqlConnection(_connectionString))
+            using (IDbConnection conn = new SqlConnection(Program.ConnectionString))
             {
                 conn.Open();
                 using (IDbTransaction tran = conn.BeginTransaction())
@@ -72,7 +69,7 @@ namespace DbMigrationTool.Migrations
 
         private DbMigration GetMigrationByName(string name)
         {
-            using (IDbConnection conn = new SqlConnection(_connectionString))
+            using (IDbConnection conn = new SqlConnection(Program.ConnectionString))
             {
                 conn.Open();
                 return conn.Query<DbMigration>("SELECT * FROM __Migration WHERE Name = @name", new { name }).FirstOrDefault();
@@ -81,7 +78,7 @@ namespace DbMigrationTool.Migrations
 
         private void AddOrUpdateMigration(DbMigration migration)
         {
-            using (IDbConnection conn = new SqlConnection(_connectionString))
+            using (IDbConnection conn = new SqlConnection(Program.ConnectionString))
             {
                 conn.Open();
                 if (migration.IsNew)

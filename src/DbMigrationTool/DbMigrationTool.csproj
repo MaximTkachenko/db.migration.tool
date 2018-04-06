@@ -6,6 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+    <None Remove="MigrationsSequence.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MigrationsSequence.xml">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MigrationsSequence.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
   </ItemGroup>
@@ -14,11 +31,6 @@
     <None Update="MigrationsSequence.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MigrationsSequence.xml</LastGenOutput>
-    </None>
-    <None Update="MigrationsSequence.xml">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>MigrationsSequence.tt</DependentUpon>
     </None>
   </ItemGroup>
 

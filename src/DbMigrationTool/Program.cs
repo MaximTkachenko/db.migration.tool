@@ -7,6 +7,7 @@ namespace DbMigrationTool
     class Program
     {
         public static IConfiguration Configuration { get; private set; }
+        public static string ConnectionString { get; private set; }
 
         static void Main(string[] args)
         {
@@ -14,6 +15,8 @@ namespace DbMigrationTool
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
             Configuration = builder.Build();
+
+            ConnectionString = Configuration.GetConnectionString("DefaultConnection");
 
             var initializer = new MigrationProcessor();
             initializer.Process(GetMode(args));

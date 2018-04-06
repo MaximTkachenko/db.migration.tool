@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Xml.Linq;
 using Dapper;
 using DbMigrationTool.Migrations;
-using Microsoft.Extensions.Configuration;
 
 namespace DbMigrationTool
 {
@@ -20,12 +19,11 @@ namespace DbMigrationTool
 
     public class MigrationProcessor
     {
-        private readonly string _connectionString = Program.Configuration.GetConnectionString("ConnectionStrings:DefaultConnection");
         private const string MigrationsSequence = "MigrationsSequence.xml";
 
         public MigrationProcessor()
         {
-            using (IDbConnection conn = new SqlConnection(_connectionString))
+            using (IDbConnection conn = new SqlConnection(Program.ConnectionString))
             {
                 conn.Open();
                 conn.Execute(@"
